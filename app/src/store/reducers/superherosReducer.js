@@ -1,10 +1,10 @@
-const initialState = {
+export const initialState = {
     superheros: [],
     isFetching: false,
     error: "",
-    page: 1,
-    nextPage: 2,
-    prevPage: null
+    page: 'https://rickandmortyapi.com/api/character/',
+    nextPage: 'https://rickandmortyapi.com/api/character/?page=2',
+    prevPage: 'https://rickandmortyapi.com/api/character/?page=1'
 }
 
 export const superheroesReducer = (state = initialState, action) => {
@@ -50,6 +50,28 @@ export const superheroesReducer = (state = initialState, action) => {
                     return{
                         ...state,
                         nextPage: action.payload
+                    }
+                case 'UPDATE_PREVPAGE_INFO':
+                    return{
+                        ...state,
+                        prevPage: action.payload
+                    }
+                case 'FETCH_PREV_SUPER_START':
+                    return{
+                        ...state,
+                        isFetching: true,
+                    }
+                case 'FETCH_PREV_SUPER':
+                    return{
+                        ...state,
+                        isFetching: false,
+                        superheros: action.payload
+                    }
+                case 'FETCH_PREV_SUPER_FAILURE':
+                    return {
+                        ...state,
+                        isFetching: false,
+                        error: action.payload
                     }
 
         default:
