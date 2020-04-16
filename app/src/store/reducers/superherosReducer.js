@@ -24,6 +24,13 @@ export const superheroesReducer = (state = initialState, action) => {
                 isFetching: false,
                 error: action.payload,
             }
+            case 'FETCH_NEXT_SUPER':
+                return{
+                    ...state,
+                    isFetching: false,
+                    superheros: action.payload
+                }
+
         default:
             return state;
     }
