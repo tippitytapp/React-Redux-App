@@ -1,7 +1,10 @@
 const initialState = {
     superheros: [],
     isFetching: false,
-    error: ""
+    error: "",
+    page: 1,
+    nextPage: 2,
+    prevPage: null
 }
 
 export const superheroesReducer = (state = initialState, action) => {
@@ -16,7 +19,8 @@ export const superheroesReducer = (state = initialState, action) => {
                 ...state,
                 isFetching: false,
                 error: '',
-                superheros: action.payload
+                superheros: action.payload,
+                page: state.page + 1
             }
         case 'FETCH_SUPER_FAILURE':
             return {
@@ -41,6 +45,11 @@ export const superheroesReducer = (state = initialState, action) => {
                         ...state,
                         isFetching: false,
                         error: action.payload
+                    }
+                case 'UPDATE_NEXTPAGE_INFO':
+                    return{
+                        ...state,
+                        nextPage: action.payload
                     }
 
         default:

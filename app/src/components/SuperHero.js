@@ -20,6 +20,8 @@ const SuperHero = props => {
     return (
         <div>
             <h1>Rick and Morty</h1>
+            <button className="previous">Previous</button>
+            <button className="next" onClick={fetchNextPage()}>Next</button>
             {props.isFetching && (<><h2 className="loading">LOADING</h2><Spinner color="warning" height={150} width={150} /></>)}
             {props.error && (<><h2 className="error">{props.error}</h2></>)}
             <Characters />
