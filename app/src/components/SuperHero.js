@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import { Spinner } from 'reactstrap';
 import Characters from './Characters';
-import SecondPage from './SecondPage'
+// import SecondPage from './SecondPage'
 
 import {fetchSuperheros, fetchNextPage, fetchPrevPage} from '../store/actions/superherosActions';
 // const example = (props) =>{
@@ -14,14 +14,14 @@ import {fetchSuperheros, fetchNextPage, fetchPrevPage} from '../store/actions/su
 // }
 const SuperHero = props => {
     useEffect(()=>{
-        props.fetchSuperheros();
+        props.fetchSuperheros(`${props.page}`);
     },[])
 
     return (
         <div>
             <h1>Rick and Morty</h1>
-            <button className="previous" onClick={()=>props.fetchPrevPage()}>Previous</button>
-            <button className="next" onClick={()=>props.fetchNextPage()}>Next</button>
+            <button className="previous" onClick={()=>props.fetchSuperheros(`${props.prevPage}`)}>Previous</button>
+            <button className="next" onClick={()=>props.fetchSuperheros(`${props.nextPage}`)}>Next</button>
             {props.isFetching && (<><h2 className="loading">LOADING</h2><Spinner color="warning" height={150} width={150} /></>)}
             {props.error && (<><h2 className="error">{props.error}</h2></>)}
             <Characters />
@@ -30,7 +30,7 @@ const SuperHero = props => {
 }
 
 const mapStateToProps = state => {
-    console.log('console from superhero', state.sHReducer.superheros)
+    console.log('console from superhero', state)
     return {
         superheros: state.sHReducer.superheros,
         isFetching: state.sHReducer.isFetching,

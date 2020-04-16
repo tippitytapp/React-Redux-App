@@ -3,8 +3,8 @@ export const initialState = {
     isFetching: false,
     error: "",
     page: 'https://rickandmortyapi.com/api/character/',
-    nextPage: 'https://rickandmortyapi.com/api/character/?page=2',
-    prevPage: 'https://rickandmortyapi.com/api/character/?page=1'
+    nextPage: '',
+    prevPage: ''
 }
 
 export const superheroesReducer = (state = initialState, action) => {
@@ -19,8 +19,9 @@ export const superheroesReducer = (state = initialState, action) => {
                 ...state,
                 isFetching: false,
                 error: '',
-                superheros: action.payload,
-                page: state.page + 1
+                superheros: action.payload.results,
+                nextPage:action.payload.info.next,
+                prevPage: action.payload.info.prev
             }
         case 'FETCH_SUPER_FAILURE':
             return {

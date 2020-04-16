@@ -4,8 +4,7 @@ import {connect} from 'react-redux';
 const Characters = props => {
     return(
         <div>
-        {props.superheros.map(item => {
-            console.log("foreach:", item)
+        { props.superheros.map(item => {
            return(  <div className='character'>
                         <img src={item.image} height={200}/>
                         <div className="character_info">
